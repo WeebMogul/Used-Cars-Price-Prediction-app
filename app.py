@@ -28,7 +28,6 @@ manufacturer = ['GMC', 'Chevrolet', 'Toyota', 'Ford', 'Jeep', 'Nissan', 'Ram', '
 
 # manufacturer = [comp.lower() for comp in manufacturer]
 
-print(manufacturer)
 quality = [x for x in range(1,6)]
 
 cylinders = ['8 cylinders', '6 cylinders', '4 cylinders', '5 cylinders',
@@ -65,7 +64,7 @@ type_data = st.selectbox('What type of vehicle is it ?',type)
 paint = st.selectbox('What is the color of your car ?',paint_color)
 titl = st.selectbox('What is the condition of your car ?',title_status)
 year_data = st.selectbox('What year is your car made in ?',year)
-odometer = st.number_input('Enter odometer values not exceeding 300000')
+odometer = st.number_input('Enter odometer values not exceeding 300000',min_value=0, max_value=3000000)
 
 cars_dict = {
 
