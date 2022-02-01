@@ -85,7 +85,7 @@ cars_dict = {
 
 get_price = st.button('Click to get your price')
 
-if get_price:
+if get_price and odometer <= 3000000:
        
        cars_items = cars_dict.items()
        cars_list = list(cars_items)
@@ -108,6 +108,8 @@ if get_price:
 
        ypr = load_model.predict(cars_df)
        cost = 'Congratulations, your ' + type_data + ' from ' +  manufacturer_data + ' would have a price tag of ${:0.2f}.'.format(ypr[0])
-       print(cost)
+       # print(cost)
        st.success(cost)
        # print(ypr)
+else:
+       st.error('Please enter the correct values for the odometer')
