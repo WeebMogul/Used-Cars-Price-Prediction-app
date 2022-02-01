@@ -14,8 +14,6 @@ def preprocess_data(df):
 
     return ef
 
-
-
 st.header('Car Prediction dataset')
 
 st.text('Want to find out how much your used vehicle will cost but cant decide on a price ? \n\nFill in the details of your vehicle and find out how much will it sell')
@@ -53,7 +51,7 @@ title_status = ['Clean', 'Rebuilt', 'Lien', 'Salvage', 'Missing',
 
 year = [x for x in range(1900,2023)]
 
-manufacturer_data = st.selectbox('Pick manufacturer',manufacturer)
+manufacturer_data = st.selectbox('Pick manufacturer',manufacturer,)
 quality_data = st.select_slider('On a scale of 1 to 5, how good is your car ?',quality)
 cylinders_data = st.selectbox('How many cylinders does your car have ?',cylinders)
 fuel_data = st.selectbox('What fuel type does your car use ?', fuel)
@@ -64,7 +62,7 @@ type_data = st.selectbox('What type of vehicle is it ?',type)
 paint = st.selectbox('What is the color of your car ?',paint_color)
 titl = st.selectbox('What is the condition of your car ?',title_status)
 year_data = st.selectbox('What year is your car made in ?',year)
-odometer = st.number_input('Enter odometer values not exceeding 300000',min_value=0, max_value=3000000)
+odometer = st.number_input('Enter odometer values between 10000 and 3000000',min_value=10000, max_value=3000000)
 
 cars_dict = {
 
@@ -85,29 +83,28 @@ cars_dict = {
 
 get_price = st.button('Click to get your price')
 
-if get_price and odometer <= 3000000:
-       
-       cars_items = cars_dict.items()
-       cars_list = list(cars_items)
-       cars_df = pd.DataFrame.from_dict(cars_dict)
+if get_price:
+              cars_items = cars_dict.items()
+              cars_list = list(cars_items)
+              cars_df = pd.DataFrame.from_dict(cars_dict)
 
-       for columns in cars_df.columns:
-              if cars_df[columns].dtypes == 'O':
-                     cars_df[columns] = cars_df[columns].apply(lambda x : str(x).lower())
+              for columns in cars_df.columns:
+                     if cars_df[columns].dtypes == 'O':
+                            cars_df[columns] = cars_df[columns].apply(lambda x : str(x).lower())
 
-       cars_df = preprocess_data(cars_df)
+              cars_df = preprocess_data(cars_df)
 
 
-       with open('carstd.sav','rb') as f:
-              standard_scaler = pk.load(f)
+              with open('carstd.sav','rb') as f:
+                     standard_scaler = pk.load(f)
 
-       cars_df = standard_scaler.transform(cars_df)
+              cars_df = standard_scaler.transform(cars_df)
 
-       with open('carpred.sav','rb') as f:
-              load_model = pk.load(f)
+              with open('carpred.sav','rb') as f:
+                     load_model = pk.load(f)
 
-       ypr = load_model.predict(cars_df)
-       cost = 'Congratulations, your ' + type_data + ' from ' +  manufacturer_data + ' would have a price tag of ${:0.2f}.'.format(ypr[0])
-       # print(cost)
-       st.success(cost)
-       # print(ypr)
+              ypr = load_model.predict(cars_df)
+              cost = 'Congratulations, your ' + type_data + ' from ' +  manufacturer_data + ' would have a price tag of ${:0.2f}.'.format(ypr[0])
+              # print(cost)
+              st.success(cost)
+              # print(ypr)
