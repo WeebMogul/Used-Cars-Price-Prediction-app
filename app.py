@@ -111,5 +111,3 @@ if get_price and odometer <= 3000000:
        # print(cost)
        st.success(cost)
        # print(ypr)
-else:
-       st.error('Please enter the correct values for the odometer')
