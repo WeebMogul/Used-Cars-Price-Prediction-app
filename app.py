@@ -18,7 +18,7 @@ def preprocess_data(df):
 
 st.header('Car Prediction dataset')
 
-st.text('Predict your car right here')
+st.text('Want to find out how much your used vehicle will cost but cant decide on a price ? Fill in the details of your vehicle and find out how much will it sell')
 
 manufacturer = ['GMC', 'Chevrolet', 'Toyota', 'Ford', 'Jeep', 'Nissan', 'Ram', 'Mazda', 
 'Cadillac', 'Honda', 'Dodge', 'Lexus', 'Jaguar', 'Buick', 'Chrysler', 'Volvo', 'Audi', 
