@@ -2,3 +2,4 @@ pandas
 streamlit
 sklearn
 xgboost==1.4.2
+joblib
