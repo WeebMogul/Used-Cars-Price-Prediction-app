@@ -1,5 +1,6 @@
 import pandas as pd
 import streamlit as st
+import joblib
 import pickle as pk
 
 def preprocess_data(df):
@@ -100,8 +101,8 @@ if get_price:
 
               cars_df = standard_scaler.transform(cars_df)
 
-              with open('carpred.sav','rb') as f:
-                     load_model = pk.load(f)
+              with open('carpred.pkl','rb') as f:
+                     load_model = joblib.load(f)
 
               ypr = load_model.predict(cars_df)
               cost = 'Congratulations, your ' + type_data + ' from ' +  manufacturer_data + ' would have a price tag of ${:0.2f}.'.format(ypr[0])
