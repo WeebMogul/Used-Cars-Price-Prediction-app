@@ -96,10 +96,10 @@ if get_price:
               cars_df = preprocess_data(cars_df)
 
 
-              with open('carstd.sav','rb') as f:
-                     standard_scaler = pk.load(f)
+              # with open('carstd.sav','rb') as f:
+              #        standard_scaler = pk.load(f)
 
-              cars_df = standard_scaler.transform(cars_df)
+              # cars_df = standard_scaler.transform(cars_df)
 
               with open('carpred.pkl','rb') as f:
                      load_model = joblib.load(f)
